@@ -47,18 +47,18 @@ def gui_table():
     #WINDOW TO GET INPUT ID AND QUANTITY
     layout = [gui.Text("Enter ID"), gui.Input(key = "ID")],
         [gui.Text("Enter Quantity"), gui.Input(key = "QTY")],
-        [gui.Button("Show BILL"), gui.Button("Exit")]]
+        [gui.Button("Show BILL"), gui.Button("CANCEL")]]
     window = gui.Window("KINDLY ENTER", layout)
     while True:
         event, values = window.read()
-        if event == gui.WIN_CLOSED or event == "Exit":
+        if event == "CANCEL" or event == gui.WIN_CLOSED:
             break
         else:
             infotable = []
             data = [['banana',20,5],['bottles',200,4],['blah',10000,6]]
-            infotable.append([values["ID"], data[int(values["QTY"])][0],values["QTY"],data[int(values["ID"])][1]])
-            gui.theme("AmberDark")
-            head = ['ID','Product Name','Quantity','price']
+            infotable.append([values["ID"], data[int(values["ID"])][0],values["QTY"],data[int(values["ID"])][1]])
+            gui.theme("DarkAmber")
+            head = ['ID','Product Name','Quantity','Price']
             # DATA IS table
             layout = [
                 [gui.Table(values = infotable, headings = head)]
@@ -69,3 +69,4 @@ def gui_table():
                 if event == "Exit" or event == gui.WIN_CLOSED:
                     break
             window.close()
+    window.close()
