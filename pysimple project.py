@@ -48,9 +48,9 @@ def gui_table():
     layout = [gui.Text("Enter ID"), gui.Input(key = "ID")],
         [gui.Text("Enter Quantity"), gui.Input(key = "QTY")],
         [gui.Button("Show BILL"), gui.Button("Exit")]]
-    window = guiWindow("KINDLY ENTER", layout)
+    window = gui.Window("KINDLY ENTER", layout)
     while True:
-        event, values = windpw.read()
+        event, values = window.read()
         if event == gui.WIN_CLOSED or event == "Exit":
             break
         else:
