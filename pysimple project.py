@@ -16,7 +16,7 @@ def billing_table():
 billing_table()
 #.append([data[i][0]]).append([q]).append([data[i][2]])
 
-#form gui
+#form gui not for project
 #1 to set a theme
 gui.theme("DarkAmber")
 
@@ -56,7 +56,7 @@ def gui_table():
         else:
             infotable = []
             data = [['banana',20,5],['bottles',200,4],['blah',10000,6]]
-            infotable.append([values["ID"], data[int(values["QTY"])][0],values["QTY"],data[int(values["ID"])][2]])
+            infotable.append([values["ID"], data[int(values["QTY"])][0],values["QTY"],data[int(values["ID"])][1]])
             gui.theme("AmberDark")
             head = ['ID','Product Name','Quantity','price']
             # DATA IS table
