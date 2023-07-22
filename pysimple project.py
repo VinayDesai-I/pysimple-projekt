@@ -90,6 +90,12 @@ def gui_prompt():
     #final layout PROBLEM POSSIBLE SOLUTION
                  #CREATE LAYOUT FOR EACH TASK IE MAKE BILL, ADMIN LOGIN STICK UPDATION
                  #NOW IN LAYOUT SET THE layout1 AS True AND OTHER ALL AS False (IMP: 1 event_= Ttue 2 Invisible = True 3 expand_x = true)
+       #layout = [  [sg.Column(layout_principal, k='layout_principal', expand_x=True)], 
+     #       [sg.pin(sg.Column(layout_suco, k='layout_suco', visible=False, expand_x=True), expand_x=True)], 
+      #      [sg.pin(sg.Column(layout_lanche, k='layout_lanche', visible=False, expand_x=True), expand_x=True)], 
+       #     [sg.pin(sg.Column(layout_acai, k='layout_acai', visible=False, expand_x=True), expand_x=True)], 
+        #    [sg.pin(sg.Column(layout_bebida, k='layout_bebida', visible=False, expand_x=True), expand_x=True)]
+#]
     layout = [[gui.Column(layout1),
                gui.VSeparator(),
                gui.Column(layout2)]
