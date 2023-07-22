@@ -76,32 +76,53 @@ def gui_prompt():
 
     gui.theme("DarkAmber")
     #layout FOR LEFT SIDE
-    layout1 = [[gui.Button("Get Information", size = (10,1))],
+    layout0 = [[gui.Button("Get Information", size = (10,1))],
               [gui.Button("List all Items", size = (10,1))],
               [gui.Button("Make BILL", size = (10,1))],
               [gui.Button("Admin Login", size = (10,1))],
               [gui.Button("Exit", size = (10,1))]
         ]
     #layout FOR RIGHT SIdE
-    layout2 = [[gui.Text("You Have Chosen", key = "dtop0"), gui.Text(" ", key = "dtop")],
-               [gui.In(size = (70, 30), key = "display")]
+    layout1 = [[gui.Text("You Have Chosen", key = "dtop0"), gui.Text(" ", key = "dtop")]
         ]
+
+
+    layout2 = [[gui.Text("You Have Chosen", key = "dtop0"), gui.Text(" ", key = "dtop")],
+        ]
+
+
+    layout3 = [[gui.Text("You Have Chosen", key = "dtop0"), gui.Text(" ", key = "dtop")],
+               [gui.Text("Enter ID", size = (10,1)), gui.Input(key = "ID", do_not_clear = False)],
+               [gui.Text("Enter Quantity", size = (10,1)), gui.Input(key = "QTY", do_not_clear = False)],
+               [gui.Button("Add")],
+               [gui.Table(values =  infotable, headings = head, key = "tablebill", justification = "centre")],
+               [gui.Text("Total Price:", size = (10,1)), gui.Text(" ", size = (10,1), key = "p")],
+               [gui.Exit()] 
+        ]
+
+
+    layout4 = [[gui.Text("You Have Chosen", key = "dtop0"), gui.Text(" ", key = "dtop")],
+        ]
+
 
     #final layout PROBLEM POSSIBLE SOLUTION
                  #CREATE LAYOUT FOR EACH TASK IE MAKE BILL, ADMIN LOGIN STICK UPDATION
-                 #NOW IN LAYOUT SET THE layout1 AS True AND OTHER ALL AS False (IMP: 1 event_= Ttue 2 Invisible = True 3 expand_x = true)
-       #layout = [  [sg.Column(layout_principal, k='layout_principal', expand_x=True)], 
-     #       [sg.pin(sg.Column(layout_suco, k='layout_suco', visible=False, expand_x=True), expand_x=True)], 
-      #      [sg.pin(sg.Column(layout_lanche, k='layout_lanche', visible=False, expand_x=True), expand_x=True)], 
-       #     [sg.pin(sg.Column(layout_acai, k='layout_acai', visible=False, expand_x=True), expand_x=True)], 
-        #    [sg.pin(sg.Column(layout_bebida, k='layout_bebida', visible=False, expand_x=True), expand_x=True)]
-#]
-    layout = [[gui.Column(layout1),
-               gui.VSeparator(),
-               gui.Column(layout2)]
-        ]
+                 #NOW IN LAYOUT SET THE layout1 AS True AND OTHER ALL AS False (IMP: expand_x = true)
 
-    window = gui.Window("PROMPT", layout)
+    #layout = [  [gui.Column(layout0, k='layout0', expand_x=True)], 
+     #       [gui.pin(gui.Column( layout1, k=' layout1', visible=False, expand_x=True), expand_x=True)], 
+      #      [gui.pin(gui.Column( layout2, k=' layout2', visible=False, expand_x=True), expand_x=True)], 
+       #     [gui.pin(gui.Column(layout_acai, k='layout_acai', visible=False, expand_x=True), expand_x=True)], 
+        #    [gui.pin(gui.Column(layout_bebida, k='layout_bebida', visible=False, expand_x=True), expand_x=True)]
+#]
+    layout = [  [gui.Column(layout0, k='layout0', expand_x=True, justification = "centre")], 
+            [gui.pin(gui.Column( layout1, k=' layout1', visible=False, expand_x=True), expand_x=True)], 
+            [gui.pin(gui.Column( layout2, k=' layout2', visible=False, expand_x=True), expand_x=True)], 
+            [gui.pin(gui.Column(layout3, k='layout3', visible=False, expand_x=True), expand_x=True)], 
+            [gui.pin(gui.Column(layout4, k='layout4', visible=False, expand_x=True), expand_x=True)]
+]    
+
+    window = gui.Window("PROMPT", layout,  size=(715,715))
 
     while True:
         event, values = window.read()
@@ -109,10 +130,30 @@ def gui_prompt():
         if event == "Make BILL":
             sb = "Make BILL"
             window["dtop"].update(sb)
+            window["layout3"].update(visible=True)
 
+            data = [['banana',20,5],['bottles',200,4],['blah',10000,6]]
+            try:
+                price1 = int(values["QTY"]) * int(data[int(values["ID"])][2])
+            except ValueError:
+                pass
+                
             
-            p = gui_table()
-            window[f"display"].p
+            try:
+                infotable.append([values["ID"], data[int(values["ID"])][0],values["QTY"],price1])
+            except ValueError:
+                pass
+
+
+            price2.append(price1)
+            window["tablebill"].update(values = infotable)
+            price = 0
+            for i in price2:
+                price+=i
+            window["p"].update(price)
+                    
+
+           
 
         if event == "Exit" or event == gui.WIN_CLOSED:
             break
