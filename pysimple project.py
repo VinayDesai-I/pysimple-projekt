@@ -70,3 +70,46 @@ def gui_table():
                     break
             window.close()
     window.close()
+#GUI for prompt
+def gui_prompt():
+    #GUI PROMPT WITH vseparator()
+
+    gui.theme("DarkAmber")
+    #layout FOR LEFT SIDE
+    layout1 = [[gui.Button("Get Information", size = (10,1))],
+              [gui.Button("List all Items", size = (10,1))],
+              [gui.Button("Make BILL", size = (10,1))],
+              [gui.Button("Admin Login", size = (10,1))],
+              [gui.Button("Exit", size = (10,1))]
+        ]
+    #layout FOR RIGHT SIdE
+    layout2 = [[gui.Text("You Have Chosen", key = "dtop0"), gui.Text(" ", key = "dtop")],
+               [gui.In(size = (70, 30), key = "display")]
+        ]
+
+    #final layout PROBLEM POSSIBLE SOLUTION
+                 #CREATE LAYOUT FOR EACH TASK IE MAKE BILL, ADMIN LOGIN STICK UPDATION
+                 #NOW IN LAYOUT SET THE layout1 AS True AND OTHER ALL AS False (IMP: 1 event_= Ttue 2 Invisible = True 3 expand_x = true)
+    layout = [[gui.Column(layout1),
+               gui.VSeparator(),
+               gui.Column(layout2)]
+        ]
+
+    window = gui.Window("PROMPT", layout)
+
+    while True:
+        event, values = window.read()
+
+        if event == "Make BILL":
+            sb = "Make BILL"
+            window["dtop"].update(sb)
+
+            
+            p = gui_table()
+            window[f"display"].p
+
+        if event == "Exit" or event == gui.WIN_CLOSED:
+            break
+
+    window.close()
+gui_prompt()
