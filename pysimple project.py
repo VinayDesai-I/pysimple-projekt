@@ -75,14 +75,10 @@ def gui_prompt():
     #GUI PROMPT WITH vseparator()
 
     gui.theme("DarkAmber")
-    #layout FOR LEFT SIDE
-    layout0 = [[gui.Button("Get Information", size = (10,1))],
-              [gui.Button("List all Items", size = (10,1))],
-              [gui.Button("Make BILL", size = (10,1))],
-              [gui.Button("Admin Login", size = (10,1))],
-              [gui.Button("Exit", size = (10,1))]
+    #layout FOR up SIDE
+    layout0 = [[gui.Button("Get Information", size = (10,1))],  [gui.Button("List all Items", size = (10,1))], [gui.Button("Make BILL", size = (10,1))], [gui.Button("Admin Login", size = (10,1))], [gui.Button("Exit", size = (10,1))]
         ]
-    #layout FOR RIGHT SIdE
+    #layout FOR down SIdE
     layout1 = [[gui.Text("You Have Chosen", key = "dtop0"), gui.Text(" ", key = "dtop")]
         ]
 
@@ -145,8 +141,9 @@ def gui_prompt():
                 pass
 
 
-            price2.append(price1)
+            
             window["tablebill"].update(values = infotable)
+            price2.append(price1)
             price = 0
             for i in price2:
                 price+=i
