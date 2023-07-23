@@ -157,3 +157,76 @@ def gui_prompt():
 
     window.close()
 gui_prompt()
+
+
+# WORKING!!!
+
+#MAIN THINGS
+price2 = []
+infotable = []
+head = ['ID','Product Name','Quantity','Price']
+price1 = 0
+
+
+
+import PySimpleGUI as gui
+def gui_prompt():
+    
+    gui.theme("DarkAmber")
+    
+    #LAYOUT(S) AS PER REQUIREMENT
+    layout1 = [
+        ]
+
+
+    layout2 = [
+        ]
+
+
+    layout3 = [
+               [gui.Text("Enter ID", size = (10,1)), gui.Input(key = "ID", do_not_clear = False)],
+               [gui.Text("Enter Quantity", size = (10,1)), gui.Input(key = "QTY", do_not_clear = False)],
+               [gui.Button("Add")],
+               [gui.Table(values =  infotable, headings = head, key = "tablebill", justification = "centre")],
+               [gui.Text("Total Price:", size = (10,1)), gui.Text(" ", size = (10,1), key = "p")],
+               [gui.Exit()] 
+        ]
+
+
+    layout4 = [
+        ]
+    
+    #FINAL LAYOUT
+    layout = [  [gui.TabGroup([[gui.Tab("Get information", layout1),
+                                gui.Tab("admin", layout2),
+                                gui.Tab("Make BILL", layout3),
+                                gui.Tab("Stock OPADAtION", layout4)]])
+        ]
+]    
+
+    window = gui.Window("General Mavika Store", layout)
+
+    while True:
+        event, values = window.read()
+
+        
+        if event == "Add":
+            data = [['banana',20,5],['bottles',200,4],['blah',10000,6]]
+            price1 = int(float(values["QTY"]))*int(float(data[int(values["ID"])][2]))
+            infotable.append([values["ID"], data[int(values["ID"])][0],values["QTY"],price1])
+            price2.append(price1)
+            window["tablebill"].update(values = infotable)
+            price = 0
+            for i in price2:
+                price+=i
+            window["p"].update(price)
+
+        #MORE if if STATEMENTS AS REQUIRE HOPEFULLY
+        
+        
+        if event == "Exit" or event == gui.WIN_CLOSED:
+            break
+
+    window.close()
+gui_prompt()
+
