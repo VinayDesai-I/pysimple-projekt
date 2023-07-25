@@ -230,3 +230,88 @@ def gui_prompt():
     window.close()
 gui_prompt()
 
+def gui_prompt2():
+    #MAIN THINGS
+    
+    price2 = []
+    infotable = []
+    head = ['ID','Product Name','Quantity','Price']
+    price1 = 0
+    
+    gui.theme("DarkAmber")
+
+    # DIFFERENT LAYOUTS
+    layout0 = [ [gui.Text("!!Welcome To Mavika store!!", size = (40, 1), font = ("Cooper Black", 40), expand_x = True, justification = "centre")],
+                [gui.Image(filename = "k test.png", size = (500, 500), expand_x = True, expand_y = True)],
+                [gui.Text("                         "), gui.Button("Get Information"), gui.Button("List all Items"), gui.Button("Make BILL"), gui.Button("Admin Login"), gui.Button("Exit")]
+        ]
+
+
+    layout1 = [
+        ]
+
+
+    layout2 = [
+        ]
+
+
+    layout3 = [
+               [gui.Text("Enter ID", size = (10,1)), gui.Input(key = "ID", do_not_clear = False)],
+               [gui.Text("Enter Quantity", size = (10,1)), gui.Input(key = "QTY", do_not_clear = False)],
+               [gui.Button("Add")],
+               [gui.Table(values =  infotable, headings = head, key = "tablebill", justification = "centre")],
+               [gui.Text("Total Price:", size = (10,1)), gui.Text(" ", size = (10,1), key = "p")],
+               [gui.Button("Back")] 
+        ]      # IF WANT TO USE BACK... BEFORE WHILE loop lay = 0... window[f'l{lay}].update
+
+
+    layout4 = [
+        ]
+
+    layout = [ [gui.Column(layout0, key = "l0"),
+                gui.Column(layout1, key = "l1", visible = False),
+                gui.Column(layout2, key = "l2", visible = False),
+                gui.Column(layout3, key = "l3", visible = False),
+                gui.Column(layout4, key = "l4", visible = False)]
+        ]
+
+    # WINDOW
+    window = gui.Window("Mavika Store", layout, size = (715, 715))
+
+
+    #while-event loop
+    while True:
+        event, values = window.read()
+
+        if event in (gui.WIN_CLOSED, "Exit"):
+            break
+
+        if event == "Get Information":
+            pass
+
+        if event == "Admin":
+            pass
+
+        if event == "Make BILL":
+            window["l3"].update(visible = True)
+            window["l0"].update(visible = False)
+
+        if event == "Add":
+            data = [['banana',20,5],['bottles',200,4],['blah',10000,6]]
+                
+            price1 = int(float(values["QTY"]))*int(float(data[int(values["ID"])][2]))
+            infotable.append([values["ID"], data[int(values["ID"])][0],values["QTY"],price1])
+            price2.append(price1)
+            window["tablebill"].update(values = infotable)
+            price = 0
+            for i in price2:
+                price+=i
+            window["p"].update(price)
+
+        if event == "Back":
+             window["l0"].update(visible = True)
+             window["l3"].update(visible = False)
+
+    window.close()
+gui_prompt2()
+
