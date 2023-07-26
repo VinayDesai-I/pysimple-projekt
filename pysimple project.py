@@ -232,7 +232,8 @@ gui_prompt()
 
 def gui_prompt2():
     #MAIN THINGS
-    
+
+    from PIL import Image
     price2 = []
     infotable = []
     head = ['ID','Product Name','Quantity','Price']
@@ -241,9 +242,9 @@ def gui_prompt2():
     gui.theme("DarkAmber")
 
     # DIFFERENT LAYOUTS
-    layout0 = [ [gui.Text("!!Welcome To Mavika store!!", size = (40, 1), font = ("Cooper Black", 40), expand_x = True, justification = "centre")],
-                [gui.Image(filename = "k test.png", size = (500, 500), expand_x = True, expand_y = True)],
-                [gui.Text("                         "), gui.Button("Get Information"), gui.Button("List all Items"), gui.Button("Make BILL"), gui.Button("Admin Login"), gui.Button("Exit")]
+    layout0 = [ [gui.Text("!!Welcome To Mavika store!!", size = (20, 1), font = ("Cooper Black", 20), expand_x = True, justification = "centre")],
+                [gui.Image(filename = "cat.png", size = (150, 220),  expand_x = True, expand_y = True)],
+                [gui.Button("Get Information"), gui.Button("List all Items"), gui.Button("Make BILL"), gui.Button("Admin Login"), gui.Button("Exit")]
         ]
 
 
@@ -251,13 +252,14 @@ def gui_prompt2():
         ]
 
 
-    layout2 = [
+    layout2 = [ [gui.Text("bleh")],
+                [gui.Button("Back ")]
         ]
 
 
     layout3 = [
-               [gui.Text("Enter ID", size = (10,1)), gui.Input(key = "ID", do_not_clear = False)],
-               [gui.Text("Enter Quantity", size = (10,1)), gui.Input(key = "QTY", do_not_clear = False)],
+               [gui.Text("Enter ID", size = (10,1)), gui.Input(key = "ID", do_not_clear = False, justification = "left")],
+               [gui.Text("Enter Quantity", size = (10,1)), gui.Input(key = "QTY", do_not_clear = False, justification = "left")],
                [gui.Button("Add")],
                [gui.Table(values =  infotable, headings = head, key = "tablebill", justification = "centre")],
                [gui.Text("Total Price:", size = (10,1)), gui.Text(" ", size = (10,1), key = "p")],
@@ -276,7 +278,7 @@ def gui_prompt2():
         ]
 
     # WINDOW
-    window = gui.Window("Mavika Store", layout, size = (715, 715))
+    window = gui.Window("Mavika Store", layout)
 
 
     #while-event loop
@@ -285,18 +287,42 @@ def gui_prompt2():
 
         if event in (gui.WIN_CLOSED, "Exit"):
             break
-
+        #*Get Info* starts
         if event == "Get Information":
             pass
+        #*Get Info* ends
 
-        if event == "Admin":
-            pass
 
+
+        # *Admin* start
+        if event == "Admin Login":
+            window["l2"].update(visible = True)
+            window["l0"].update(visible = False)
+        if event == "Back ":
+            window["l0"].update(visible = True)
+            window["l2"].update(visible = False)
+
+        # *Admin* end
+
+
+
+        # *Bill*
         if event == "Make BILL":
             window["l3"].update(visible = True)
             window["l0"].update(visible = False)
 
-        if event == "Add":
+        if event == "Back":
+             window["l0"].update(visible = True)
+             window["l3"].update(visible = False)
+
+             
+        if event == "Add" and values["ID"] == '' and values["QTY"] == '':
+            gui.Popup("Please Enter ID and QUANTITY")
+
+
+        if event == "Add" and values["ID"] != '' and values["QTY"] != '':
+
+            
             data = [['banana',20,5],['bottles',200,4],['blah',10000,6]]
                 
             price1 = int(float(values["QTY"]))*int(float(data[int(values["ID"])][2]))
@@ -307,11 +333,13 @@ def gui_prompt2():
             for i in price2:
                 price+=i
             window["p"].update(price)
+        #^Bill^ end
 
-        if event == "Back":
-             window["l0"].update(visible = True)
-             window["l3"].update(visible = False)
 
+        #*Items*starts
+        if event == "List all Items":
+            pass
+        #*Items*starts
     window.close()
 gui_prompt2()
 
