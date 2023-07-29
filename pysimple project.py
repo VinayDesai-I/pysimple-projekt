@@ -230,6 +230,7 @@ def gui_prompt():
     window.close()
 gui_prompt()
 
+#gui_prompt()
 def gui_prompt2():
     #MAIN THINGS
 
@@ -252,8 +253,15 @@ def gui_prompt2():
         ]
 
 
-    layout2 = [ [gui.Text("bleh")],
-                [gui.Button("Back ")]
+    layout2 = [ [gui.Text("Welcome to Admin Login", expand_x = "True", justification = "centre")],
+                [gui.Text("Enter Name", size = (12,1)), gui.Input(key = "NAME", do_not_clear = False)],
+                [gui.Text("Enter Password", size = (12,1)), gui.Input(key = "PASSWORD", do_not_clear = False)],
+                [gui.Button("Enter"), gui.Button("Back ")]
+        ]
+
+
+    layout21 = [ [gui.Text("Stock Updation")],
+                 [gui.Button("back")]
         ]
 
 
@@ -273,12 +281,13 @@ def gui_prompt2():
     layout = [ [gui.Column(layout0, key = "l0"),
                 gui.Column(layout1, key = "l1", visible = False),
                 gui.Column(layout2, key = "l2", visible = False),
+                gui.Column(layout21, key = "l21", visible = False),
                 gui.Column(layout3, key = "l3", visible = False),
                 gui.Column(layout4, key = "l4", visible = False)]
         ]
 
     # WINDOW
-    window = gui.Window("Mavika Store", layout)
+    window = gui.Window("Mavika Store", layout, resizable = True)
 
 
     #while-event loop
@@ -302,6 +311,20 @@ def gui_prompt2():
             window["l0"].update(visible = True)
             window["l2"].update(visible = False)
 
+        if event == "Enter":
+            name = ["vinay", "kalpit", "mathew"]
+            password = ["ayo", "akhila123", "yo"]
+            if values["NAME"] in name and values["PASSWORD"] in password:
+                window["l21"].update(visible = True)
+                window["l2"].update(visible = False)
+                #stock updation
+            else:
+                gui.Popup("YOU'RE NOT AUTHORISED PERSONNEl!!!")
+
+
+        if event == "back":
+            window["l0"].update(visible = True)
+            window["l21"].update(visible = False)
         # *Admin* end
 
 
