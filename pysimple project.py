@@ -234,7 +234,9 @@ gui_prompt()
 def gui_prompt2():
     #MAIN THINGS
 
-    from PIL import Image
+    #from PIL import Image
+    data = [['banana',20,5],['bottles',200,4],['blah',10000,6]]
+    supdation = ['Add', 'Update', 'Delete']
     price2 = []
     infotable = []
     head = ['ID','Product Name','Quantity','Price']
@@ -252,7 +254,10 @@ def gui_prompt2():
 
 
     #GET INFORMATION 
-    layout1 = [
+    layout1 = [ [gui.Text("Welcome to Get Information", expand_x = "True", justification = "centre")],
+                [gui.Text("Enter Item ID", size = (12,1)), gui.Input(key = "ITEMID", do_not_clear = False)],
+                [gui.Text("Enter Item Name", size = (12,1)), gui.Input(key = "ITEMNAME", do_not_clear = False)],
+                [gui.Table(values =  data, headings = head, key = "infotable", justification = "centre")],
         ]
 
    
@@ -265,23 +270,25 @@ def gui_prompt2():
 
    
     #UNDER ADMIN LOGIN - "STOCK UPDATION"
-    layout21 = [ [gui.Text("Stock Updation")],
+    layout21 = [ [gui.Text("Welcome to Stock Updation", expand_x = "True", justification = "centre")],
+                 [gui.Text("Select your Choice")],[gui.Listbox(supdation, key = "stockupdation"],
                  [gui.Button("Back", key = "back_stock")]
         ]
 
   
-    #MAK BILL
-    layout3 = [
-               [gui.Text("Enter ID", size = (10,1)), gui.Input(key = "ID", do_not_clear = False, justification = "left")],
-               [gui.Text("Enter Quantity", size = (10,1)), gui.Input(key = "QTY", do_not_clear = False, justification = "left")],
-               [gui.Button("Add")],
-               [gui.Table(values =  infotable, headings = head, key = "tablebill", justification = "centre")],
-               [gui.Text("Total Price:", size = (10,1)), gui.Text(" ", size = (10,1), key = "p")],
-               [gui.Button("Back", key = "back_bill")] 
+    #MAKE BILL
+    layout3 = [ [gui.Text("Welcome to Bill", expand_x = "True", justification = "centre")],
+                [gui.Text("Enter ID", size = (10,1)), gui.Input(key = "ID", do_not_clear = False, justification = "left")],
+                [gui.Text("Enter Quantity", size = (10,1)), gui.Input(key = "QTY", do_not_clear = False, justification = "left")],
+                [gui.Button("Add")],
+                [gui.Table(values =  infotable, headings = head, key = "tablebill", justification = "centre")],
+                [gui.Text("Total Price:", size = (10,1)), gui.Text(" ", size = (10,1), key = "p")],
+                [gui.Button("Back", key = "back_bill")] 
         ]      
 
     #LIST ALL ITEMS 
-    layout4 = [
+    layout4 = [ [gui.Text("Welcome to All Items", expand_x = "True", justification = "centre")],
+                [gui.Table(values =  data, headings = head, key = "listbill", justification = "centre")],
         ]
 
     #MAIN LAYOUT
