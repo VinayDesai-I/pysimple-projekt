@@ -273,9 +273,12 @@ def gui_prompt2():
    
     #UNDER ADMIN LOGIN - "STOCK UPDATION"
     layout21 = [ [gui.Text("Welcome to Stock Updation", expand_x = "True", justification = "centre")],
-                 [gui.Text("Select your Choice")],[gui.Listbox(values = ['Add', 'Update', 'Delete'], key = "stockupdation"],
+                 [gui.Text("Select your Choice")],[gui.Listbox(values = ['Add', 'Update', 'Delete'], key = "stockupdation", select_mode = "single"],
                  [gui.Button("Back", key = "back_stock")]
         ]
+
+
+    #UNDER STOCK UPDATION - "ADD" "UPDATE" "DELETE" separate
 
   
     #MAKE BILL
@@ -355,8 +358,15 @@ def gui_prompt2():
                 #stock updation
             else:
                 gui.Popup("YOU'RE NOT AUTHORISED PERSONNEl!!!")
-
         
+        if values["stockupdation"] == "Add":
+            pass
+
+        if values["stockupdation"] == "Update":
+            pass
+
+        if values["stockupdation"] == "Delete":
+            pass
 
 
         if event == "back_stock":
