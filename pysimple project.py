@@ -257,7 +257,9 @@ def gui_prompt2():
     layout1 = [ [gui.Text("Welcome to Get Information", expand_x = "True", justification = "centre")],
                 [gui.Text("Enter Item ID", size = (12,1)), gui.Input(key = "ITEMID", do_not_clear = False)],
                 [gui.Text("Enter Item Name", size = (12,1)), gui.Input(key = "ITEMNAME", do_not_clear = False)],
+                [gui.Button("Search"),
                 [gui.Table(values =  data, headings = head, key = "infotable", justification = "centre")],
+                [gui.Button("Back", key = "back_getinfo")]
         ]
 
    
@@ -289,6 +291,7 @@ def gui_prompt2():
     #LIST ALL ITEMS 
     layout4 = [ [gui.Text("Welcome to All Items", expand_x = "True", justification = "centre")],
                 [gui.Table(values =  data, headings = head, key = "listbill", justification = "centre")],
+                [gui.Button("Back", key = "back_allitems")]
         ]
 
     #MAIN LAYOUT
@@ -310,9 +313,27 @@ def gui_prompt2():
 
         if event in (gui.WIN_CLOSED, "Exit"):
             break
+       
         #*Get Info* starts
         if event == "Get Information":
-            pass
+            window["l1"].update(visible = True)
+            window["l0"].update(visible = False)
+
+
+        if event == "Search" and values["ITEMID"] == '' and values["ITEMNAME"] == '':
+            gui.Popup("Please Enter ID and NAME")
+
+
+        if event == "Search" and values["ITEMID"] != '' and values["ITEMNAME"] != '':
+            # mathew's code from make bILL
+            
+
+
+        if event == "back_getinfo":
+            window["l0"].update(visible = True)
+            window["l1"].update(visible = False)
+
+        
         #*Get Info* ends
 
 
@@ -334,6 +355,8 @@ def gui_prompt2():
                 #stock updation
             else:
                 gui.Popup("YOU'RE NOT AUTHORISED PERSONNEl!!!")
+
+        
 
 
         if event == "back_stock":
@@ -375,7 +398,14 @@ def gui_prompt2():
 
         #*Items*starts
         if event == "List all Items":
-            pass
+            window["l4"].update(visible = True)
+            window["l0"].update(visible = False)
+
+            #sql backend code?
+            
+        if event == "back_allitems":
+             window["l0"].update(visible = True)
+             window["l4"].update(visible = False)
         #*Items*starts
     window.close()
 gui_prompt2()
