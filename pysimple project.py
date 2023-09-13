@@ -236,7 +236,7 @@ def gui_prompt2():
 
     #from PIL import Image
     data = [['banana',20,5],['bottles',200,4],['blah',10000,6]]
-    supdation = ['Add', 'Update', 'Delete']
+    #supdation = ['Add', 'Update', 'Delete']
     price2 = []
     infotable = []
     head = ['ID','Product Name','Quantity','Price']
@@ -273,7 +273,7 @@ def gui_prompt2():
    
     #UNDER ADMIN LOGIN - "STOCK UPDATION"
     layout21 = [ [gui.Text("Welcome to Stock Updation", expand_x = "True", justification = "centre")],
-                 [gui.Text("Select your Choice")],[gui.Listbox(supdation, key = "stockupdation"],
+                 [gui.Text("Select your Choice")],[gui.Listbox(values = ['Add', 'Update', 'Delete'], key = "stockupdation"],
                  [gui.Button("Back", key = "back_stock")]
         ]
 
@@ -396,7 +396,7 @@ def gui_prompt2():
         #^Bill^ end
 
 
-        #*Items*starts
+        #*Items* starts
         if event == "List all Items":
             window["l4"].update(visible = True)
             window["l0"].update(visible = False)
@@ -406,7 +406,7 @@ def gui_prompt2():
         if event == "back_allitems":
              window["l0"].update(visible = True)
              window["l4"].update(visible = False)
-        #*Items*starts
+        #*Items* end
     window.close()
 gui_prompt2()
 
